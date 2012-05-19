@@ -1,0 +1,48 @@
+body {
+    color: green; 
+    font-family: verdana;
+}
+
+.TitleServiceChange {
+    font-size:2em; 
+    color:red; 
+    background-color:#99CCFF; 
+    border-radius:5px; 
+    border: 2px solid black; 
+    padding:5px; 
+    display: block;
+}
+
+.DateStyle {
+    color:#000000
+}
+
+.TitlePlannedWork {
+    font-size:2em; 
+    color:red; 
+    background-color:#99CCFF; 
+    border: 2px solid black; 
+    border-radius:5px; 
+    padding:5px; 
+    margin-top:-10px; 
+    display: block;
+}
+
+.plannedWorkDetailLink{
+    font-style:italic; 
+    color:black; 
+    line-height: 50px
+}
+
+p {
+    font-style:italic; 
+    color:black; 
+    margin-top:-10px;
+}
+
+.plannedWorkDetail {
+    font-style:italic; 
+    color:black; 
+    margin-top:-10px; 
+    line-height: -75px;
+}

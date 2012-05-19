@@ -1,0 +1,9 @@
+{
+    "id": "com.nycwebosmeetup.enyo-nyc-subway-status",
+    "version": "1.0.0",
+    "vendor": "NYC WebOS Meetup",
+    "type": "web",
+    "main": "app.html",
+    "title": "NYC WebOS Meetup Subway Status App",
+    "uiRevision": 2
+}
