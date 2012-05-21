@@ -4,3 +4,6 @@
 [submodule "js/libs/onyx"]
 	path = js/libs/onyx
 	url = https://github.com/enyojs/onyx.git
+[submodule "js/enyo"]
+	path = js/enyo
+	url = https://github.com/enyojs/enyo.git
