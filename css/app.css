@@ -1,15 +1,30 @@
+.panels > * {
+    width: 350px;
+}
+
+/* be responsive */
+@media all and (max-width: 450px) {
+    .panels > * {
+        min-width: 100%;
+    }
+}
+
+
 body {
     color: green; 
     font-family: verdana;
 }
 
-.TitleServiceChange {
+.TitleServiceChange,
+.TitlePlannedWork {
     font-size:2em; 
-    color:red; 
-    background-color:#99CCFF; 
-    border-radius:5px; 
-    border: 2px solid black; 
-    padding:5px; 
+/*    color:red; */
+/*    background-color:#99CCFF; */
+/*    border-radius:5px; */
+    background-image: url("../js/lib/onyx/images/gradient.png");
+    background-size: contain;
+    border-bottom: 1px solid #4C4C4C; 
+    padding: 0px; 
     display: block;
 }
 
@@ -17,7 +32,7 @@ body {
     color:#000000
 }
 
-.TitlePlannedWork {
+/* {
     font-size:2em; 
     color:red; 
     background-color:#99CCFF; 
@@ -26,7 +41,7 @@ body {
     padding:5px; 
     margin-top:-10px; 
     display: block;
-}
+}*/
 
 .plannedWorkDetailLink{
     font-style:italic; 
@@ -45,4 +60,28 @@ p {
     color:black; 
     margin-top:-10px; 
     line-height: -75px;
+}
+
+#detailPane {
+    padding: 5px;
+}
+
+#mainList {
+    background-color: #4c4c4c;
+    color: #FFF;
+}
+
+.service_title,
+.entry-item {
+    padding: 10px;   
+    border-bottom: 1px #000 solid;
+}
+
+.service_title {
+    background-image: url("../js/lib/onyx/images/gradient.png");
+    background-size: contain;
+}
+
+.entry-item {
+    font-size: 16px;
 }
