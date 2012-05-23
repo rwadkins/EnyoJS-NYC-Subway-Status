@@ -1,11 +1,12 @@
 .panels > * {
-    width: 350px;
+    width: 300px;
 }
 
 /* be responsive */
-@media all and (max-width: 450px) {
+@media all and (max-width: 480px) {
     .panels > * {
         min-width: 100%;
+/*        width: 100%;*/
     }
 }
 
@@ -84,4 +85,17 @@ p {
 
 .entry-item {
     font-size: 16px;
+}
+
+.entry-item-selected {
+    background-color: #00688B;
+}
+
+.itemFavorite {
+    background-image: url("../images/star.png");        
+}
+
+.itemFavoriteSelected {
+    background-position: 0px -24px !important;
+}
 }
