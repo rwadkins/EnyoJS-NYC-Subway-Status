@@ -5,6 +5,7 @@ enyo.kind({
     style: "position: relative;",
     events: {
         onItemSelected: "",
+        onItemFavorite: "",
     },
     handlers: {
         ontap: "handleTap"
@@ -18,13 +19,20 @@ enyo.kind({
         {
             name: "itemStatus",
             caption: "",
-            style: "position: absolute; top: 10px; right: 10px;"
+            style: "position: absolute; top: 10px; right: 39px;"
+        },
+        {
+            name: "itemFavorite",
+            caption: "",
+            classes: "itemFavorite",
+            style: "position: absolute; top: 10px; right: 10px; height: 24px; width: 24px;"
         }
     ],
     // ontap: "handleTap",
     published: {
         title: "",
-        data: null, 
+        data: null,
+        favorite: false
     },
     titleChanged: function(inSender, inEvent) {
         this.$.itemTitle.setContent(this.getTitle());
@@ -50,7 +58,20 @@ enyo.kind({
         
         return statuses[inString];
     },
+    favoriteChanged: function(inSender, inEvent) {
+        this.$.itemFavorite.addRemoveClass('itemFavoriteSelected', this.getFavorite());
+    },
     handleTap: function(inSender, inEvent) {
-        this.doItemSelected(this.getData());
+        var favorite, d;
+        if (inSender.name === "itemFavorite") {
+            d = this.getData();
+            favorite = !d.favorite;
+            d.favorite = favorite; 
+            this.setFavorite(favorite);
+            this.doItemFavorite(d);
+        }
+        else {
+            this.doItemSelected(this.getData());
+        }
     }
 });

@@ -37,9 +37,19 @@ enyo.kind({
     published: {
         title: "",
         data: null,
+        key: "",
+        open: false
+    },
+    events: {
+        onServiceTap: "",
     },
     titleTap: function(inSender, inEvent) {
-        this.$.EntryListDrawer.setOpen(!this.$.EntryListDrawer.open);
+        this.setOpen(!this.$.EntryListDrawer.open)
+        this.doServiceTap({"open": this.getOpen()})
+    },
+    openChanged: function(inSender, inEvent) {
+        // enyo.log("openChanged" + this.getKey());
+        this.$.EntryListDrawer.setOpen(this.getOpen());
     },
     titleChanged: function(inSender, inEvent) {
         this.$.Title.setContent(this.getTitle());
@@ -57,7 +67,8 @@ enyo.kind({
         
         itemControl.setTitle(k);
         itemControl.setData(d);
-        
+        itemControl.setFavorite(d.favorite);
+        this.$.EntryListDrawer.setOpen(this.getOpen());
         return true;
     },
     getLines: function() {

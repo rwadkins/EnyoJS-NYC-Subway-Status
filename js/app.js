@@ -32,35 +32,55 @@ enyo.kind({
             draggable: false,
             components: [
                 {
-                    name: "MainList",
-                    kind: "Repeater",
-                    style: "overflow: auto;",
+                    kind: "Scroller",
                     id: "mainList",
-                    rows: 0,
-                    onSetupItem: "setUpRow",
                     components: [
                         {
-                            name: "ServiceItem",
-                            kind: "ServiceItem"
+                            name: "MainList",
+                            kind: "Repeater",
+                            style: "overflow: auto;",
+                            rows: 0,
+                            onSetupItem: "setUpRow",
+                            components: [
+                                {
+                                    name: "ServiceItem",
+                                    kind: "ServiceItem"
+                                }
+                            ]
                         }
                     ]
                 },
                 {
-                    id: "detailPane",
-                    name: "DetailPane",
+                    kind: "Scroller",
                     classes: "onyx",
-                    style: "overflow: auto;",
-                    allowHtml: true,
-                    content: ""
+                    components: [
+                        {
+                            id: "detailPane",
+                            name: "DetailPane",
+                            style: "overflow: auto;",
+                            allowHtml: true,
+                            content: ""
+                        }
+                    ]
                 }
             ]
         }
     ],
     published: {
         data: "",
+        favorites: "",
     },
     handlers: {
-        onItemSelected: "entryItemSelected"
+        onItemSelected: "entryItemSelected",
+        onItemFavorite: "entryItemFavorite",
+        onServiceTap: "serviceTap"
+    },
+    create: function() {
+        this.inherited(arguments);
+        this.storage = Storage;
+        this.setFavorites(this.storage.get("favorites") || []);
+        this.opened = this.storage.get("opened") || {};
+        this.setData(this.storage.get("feedData") || {});
     },
     getMTAData: function() {
         var ajax = new enyo.Ajax({ 
@@ -75,24 +95,30 @@ enyo.kind({
         this.setData(parseData(inResponse));
     },
     dataChanged: function(inSender, inResponse) {
+        this.markFavorites();
         this.$.MainList.setCount(this.getServices().length);
+        this.storage.set("feedData", this.getData());
+        return true;
     },
     setUpRow: function(inSender, inEvent) {
         var i = inEvent.index;
         var s = this.getServices()[i];
         var rowControl = inEvent.item.controls[0];
         rowControl.setTitle(s.display);
-        if ( s.key.length ) {
+        if ( s.key !== '_favorites_') {
             rowControl.setData(this.getData()[s.key]);
         }
-        
-        //set the data too
-        
+        else {
+            rowControl.setData(this.parseFavorites());
+        }
+        rowControl.setKey(s.key);
+        rowControl.setOpen(this.opened[s.key]);
+        // enyo.log("setUpRow " + s.key);
         return true;
     },
     getServices: function() {
         var services = [ 
-            { display: 'Favorites', key: '' }, 
+            { display: 'Favorites', key: '_favorites_' }, 
             { display: 'Subway', key: 'subway' }, 
             { display: 'Bus', key: 'bus' }, 
             { display: 'LIRR', key: 'LIRR' }, 
@@ -101,19 +127,79 @@ enyo.kind({
         ];
         return services;
     },
+    parseFavorites: function() {
+        var f = this.getFavorites().sort();
+        var i = 0; 
+        var l = f.length;
+        var keyParts = [];
+        var d = {};
+        var favorites = {}
+        
+        for (i = 0; i < l; i += 1) {
+            keyParts = f[i].split(".");
+            d[keyParts[1]] = this.getData()[keyParts[0]][keyParts[1]];
+        }
+        
+        return d;
+    },
+    markFavorites: function() {
+        var f = this.parseFavorites();
+        var fKeys = Object.keys(f);
+        var i = 0;
+        var l = fKeys.length;
+        
+        for (i = 0; i < l; i += 1) {
+            f[fKeys[i]].favorite = true;
+        }
+    },
     entryItemSelected: function(inSender, inEvent) {
         if(this.isSmall()) {
             this.$.Main.setIndex(1);
             this.$.BackButton.setShowing(true);
         }
+        if (this.lastSelectedItem) {
+            this.lastSelectedItem.addRemoveClass("entry-item-selected", false);
+        }
+        inEvent.originator.addRemoveClass("entry-item-selected", true);
+        this.lastSelectedItem = inEvent.originator; 
         this.$.DetailPane.setContent(inEvent.text);
     },
     backTap: function(inSender, inEvent) {
         this.$.BackButton.setShowing(false);
+        if (this.lastSelectedItem) {
+            this.lastSelectedItem.addRemoveClass("entry-item-selected", false);
+        }
         this.$.Main.setIndex(0);
     },
     isSmall: function() {
-        return window.matchMedia && window.matchMedia("all and (max-width:450px)").matches;
+        // console.log("client width: " + document.documentElement.clientWidth);
+        return document.documentElement.clientWidth <= 480;
+        // return window.matchMedia && window.matchMedia("all and (max-width:481px)").matches;
+    },
+    entryItemFavorite: function(inSender, inEvent) {
+        // enyo.log(inSender);
+        // enyo.log(inEvent);
+        var favorites = this.getFavorites() || [];
+        var idx;
+        
+        if ( inEvent.favorite ) {
+            favorites.push(inEvent.favoriteKey);
+        }
+        else {
+            idx = favorites.indexOf(inEvent.favoriteKey);
+            favorites.splice(idx, 1);   
+        }
+        // enyo.log(this.$.MainList.$);
+        this.setFavorites(favorites);
+        this.storage.set("favorites", favorites);
+        delete inEvent.originator;
+        this.dataChanged();
+        return true;
+    },
+    serviceTap: function(inSender, inEvent) {
+        var opened = this.opened || [];
+        opened[inEvent.originator.getKey()] = inEvent.open;
+        this.opened = opened;
+        this.storage.set("opened", opened);
     }
-
 });
