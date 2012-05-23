@@ -3,12 +3,16 @@
 
 <head>
   <title>MTA Status</title>
+  <meta name="viewport" content="height=device-height"/>
   <script src="js/enyo/enyo.js"></script>
   <script src="depends.js"></script>
 </head>
 
 <body>
 <script type="text/javascript">
+    if (window.PalmSystem) {
+        window.PalmSystem.stageReady();
+    };  
     new App().renderInto(document.body);
 </script>
 </body>
