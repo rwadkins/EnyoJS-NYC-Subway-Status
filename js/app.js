@@ -78,6 +78,10 @@ enyo.kind({
     create: function() {
         this.inherited(arguments);
         this.storage = Storage;
+        // this.retrieveFromStorage()
+        this.$.Main.setIndex(0);
+    },
+    retrieveFromStorage: function() {
         this.setFavorites(this.storage.get("favorites") || []);
         this.opened = this.storage.get("opened") || {};
         this.setData(this.storage.get("feedData") || {});

@@ -1,9 +1,3 @@
-[submodule "js/libs/layout"]
-	path = js/libs/layout
-	url = https://github.com/enyojs/layout.git
-[submodule "js/libs/onyx"]
-	path = js/libs/onyx
-	url = https://github.com/enyojs/onyx.git
 [submodule "js/enyo"]
 	path = js/enyo
 	url = https://github.com/enyojs/enyo.git

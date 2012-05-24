@@ -25,6 +25,7 @@ function parseData(parseText) {
                     dataItem[fields[f]] = dataNode.childNodes[0].nodeValue;
                 }
             }
+            dataItem.favoriteKey = services[s] + '.' + dataItemName;
             data[services[s]][dataItemName] = dataItem;
         }
     }

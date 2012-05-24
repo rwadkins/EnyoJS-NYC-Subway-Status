@@ -13,7 +13,10 @@
     if (window.PalmSystem) {
         window.PalmSystem.stageReady();
     };  
-    new App().renderInto(document.body);
+    var app = new App();
+    setTimeout(function() {app.renderInto(document.body)}, 500);
+    app.reflow()
+    app.retrieveFromStorage() 
 </script>
 </body>
 
