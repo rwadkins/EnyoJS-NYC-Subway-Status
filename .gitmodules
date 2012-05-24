@@ -1,3 +1,7 @@
 [submodule "js/enyo"]
 	path = js/enyo
 	url = https://github.com/enyojs/enyo.git
+	ignore = dirty
+[submodule "js/lib/onyx"]
+	path = js/lib/onyx
+	url = git://github.com/enyojs/onyx
