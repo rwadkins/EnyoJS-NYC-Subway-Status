@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>MTA Status</title>
+  <meta name="viewport" content="height=device-height"/>
+  <script src="cordova-1.7.0.js"></script>
+  <script src="js/enyo/enyo.js"></script>
+  <script src="depends.js"></script>
+</head>
+
+<body onLoad="onBodyLoad()">
+<script type="text/javascript">
+
+    function onBodyLoad(){
+        //--> For browser testing:
+        onDeviceReady();
+        //--> For devices
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
+    function onDeviceReady(){
+        //try{
+            if (window.PalmSystem) {
+                window.PalmSystem.stageReady();
+            };  
+            var app = new App();
+            setTimeout(function() {app.renderInto(document.body)}, 500);
+            app.reflow()
+            app.retrieveFromStorage() 
+        //}catch(e){
+        //  console.log(e);
+        //  alert(e);
+        //}
+    }
+</script>
+</body>
+
+</html>
