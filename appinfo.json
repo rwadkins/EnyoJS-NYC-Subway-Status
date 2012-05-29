@@ -1,9 +1,0 @@
-{
-    "id": "com.rwadkins.enyo-nyc-subway-status",
-    "version": "1.0.0",
-    "vendor": "rwadkins",
-    "type": "web",
-    "main": "app.html",
-    "title": "NYC MTA Status App",
-    "uiRevision": 2
-}
