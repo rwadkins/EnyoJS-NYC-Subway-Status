@@ -1,5 +1,5 @@
 .panels > * {
-    width: 300px;
+    width: 320px;
 }
 
 /* be responsive */
@@ -100,6 +100,10 @@ p {
     font-size: 16px;
 }
 
+.entry-item > div {
+    line-height: 24px;
+    vertical-align: middle;
+}
 .entry-item-selected {
     background-color: #00688B;
     color: #FFF;
@@ -139,3 +143,37 @@ p {
         -webkit-transform:rotate(360deg);
     }
 }
+
+.green-status,
+.yellow-status,
+.red-status,
+.orange-status {
+    -webkit-box-sizing: border-box;
+    border-radius: 5px;
+    background-image: url("../js/lib/onyx/images/gradient.png");
+} 
+
+.green-status {
+    background-color: green;
+    border: 1px solid #254117;
+}
+
+.yellow-status {
+    background-color: yellow;
+    border: 1px solid #C68E17;
+}
+
+.red-status {
+    background-color: red;   
+    border: 1px solid #7e2217;
+}
+
+.orange-status {
+    background-color: orange;
+    border: 1px solid #C68E17;
+}
+
+.itemStatus {
+    font-size: 12px;
+}
+

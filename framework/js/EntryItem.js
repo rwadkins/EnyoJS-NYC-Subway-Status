@@ -12,20 +12,27 @@ enyo.kind({
     },
     components: [
         {
+            name: "itemFavorite",
+            caption: "",
+            classes: "itemFavorite",
+            // style: "position: absolute; top: 10px; right: 10px; height: 24px; width: 24px;"
+            style: "height: 24px; width: 24px;"
+        },
+        {
             name: "itemTitle",
             caption: "",
+            style: "position: absolute; top: 10px; left: 39px;"
             //fit: true
         },
         {
             name: "itemStatus",
+            classes: "itemStatus",
             caption: "",
             style: "position: absolute; top: 10px; right: 39px;"
         },
         {
-            name: "itemFavorite",
-            caption: "",
-            classes: "itemFavorite",
-            style: "position: absolute; top: 10px; right: 10px; height: 24px; width: 24px;"
+            name: "itemStatusColor",
+            style: "position: absolute; top: 10px; right: 10px; height: 24px; width: 24px;"            
         }
     ],
     // ontap: "handleTap",
@@ -39,20 +46,25 @@ enyo.kind({
     },
     dataChanged: function(inSender, inEvent) {
         this.$.itemStatus.setContent(this.statusTranslation(this.getData().status).text);
+        this.$.itemStatusColor.setClassAttribute(this.statusTranslation(this.getData().status).colorStyle);
     },
     statusTranslation: function(inString) {
         var statuses = {
             "PLANNED WORK": {
-                text: "Planned Work"
+                text: "Planned Work",
+                colorStyle: "orange-status"
             },
             "GOOD SERVICE": {
-                text: "Good Service"
+                text: "Good Service",
+                colorStyle: "green-status"
             },
             "SERVICE CHANGE": {
-                text: "Service Change"
+                text: "Service Change",
+                colorStyle: "red-status"
             },
             "DELAYS": {
-                text: "Delays"
+                text: "Delays",
+                colorStyle: "yellow-status"
             }
         };
         

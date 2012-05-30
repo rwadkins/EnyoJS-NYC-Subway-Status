@@ -218,7 +218,7 @@ enyo.kind({
         }
         inEvent.originator.addRemoveClass("entry-item-selected", true);
         this.lastSelectedItem = inEvent.originator; 
-        this.$.DetailPane.setContent(inEvent.text);
+        this.$.DetailPane.setContent(inEvent.status === "GOOD SERVICE" ? this.getGoodText() : inEvent.text);
     },
     backTap: function(inSender, inEvent) {
         this.$.BackButton.setShowing(false);
@@ -226,6 +226,15 @@ enyo.kind({
             this.lastSelectedItem.addRemoveClass("entry-item-selected", false);
         }
         this.$.Main.setIndex(0);
+    },
+    getGoodText: function() {
+        var texts = [
+            "Enjoy the Ride!",
+        ];
+        
+        var i = parseInt((Math.random() * texts.length), 10);
+        
+        return texts[i];
     },
     isSmall: function() {
         // console.log("client width: " + document.documentElement.clientWidth);
