@@ -71,6 +71,15 @@ p {
     height: 100%;
 }
 
+#smile {
+	text-align:center;
+	margin-top:25%;
+	/*background-image: url("../images/smile.png") center no-repeat;
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 250px;*/
+}
+
 #mainList {
     background-color: #00688B;
 /*    background-color: #4c4c4c;*/
@@ -105,7 +114,7 @@ p {
     vertical-align: middle;
 }
 .entry-item-selected {
-    background-color: #00688B;
+    background-color: #918F8F;
     color: #FFF;
 }
 
@@ -143,6 +152,11 @@ p {
         -webkit-transform:rotate(360deg);
     }
 }
+
+/*.onyx-toolbar .onyx-button {
+	background-color: #918F8F !important;
+	border: none !important;
+}*/
 
 .green-status,
 .yellow-status,
