@@ -231,7 +231,15 @@ enyo.kind({
     },
     getGoodText: function() {
         var texts = [
-            "<div id=\"smile\"><img src=\"images/smile.png\"><br />Enjoy Your Ride!</div>", "<div id=\"smile\"><img src=\"images/smile.png\"><br />Have a Safe Trip!</div>", "<div id=\"smile\"><img src=\"images/smile.png\"><br />Come Back Soon!</div>", "<div id=\"smile\"><img src=\"images/smile.png\"><br />Tell a Friend About Our App!</div>", "<div id=\"smile\"><img src=\"images/smile.png\"><br />See Something, Say Something...</div>", "<div id=\"smile\"><img src=\"images/smile.png\"><br />Mind the Gap!</div>", "<div id=\"smile\"><img src=\"images/smile.png\"><br />Take a Nap if You Want!</div>", "<div id=\"smile\"><img src=\"images/smile.png\"><br />Take Me with You!</div>", "<div id=\"smile\"><img src=\"images/smile.png\"><br />Don't Talk to Strangers!</div>"
+            "<div id=\"smile\"><img src=\"images/smile.png\"><br />Enjoy Your Ride!</div>", 
+            "<div id=\"smile\"><img src=\"images/smile.png\"><br />Have a Safe Trip!</div>", 
+            "<div id=\"smile\"><img src=\"images/smile.png\"><br />Come Back Soon!</div>", 
+            "<div id=\"smile\"><img src=\"images/smile.png\"><br />Tell a Friend About Our App!</div>", 
+            "<div id=\"smile\"><img src=\"images/smile.png\"><br />See Something, Say Something...</div>", 
+            "<div id=\"smile\"><img src=\"images/smile.png\"><br />Mind the Gap!</div>", 
+            "<div id=\"smile\"><img src=\"images/smile.png\"><br />Take a Nap if You Want!</div>", 
+            "<div id=\"smile\"><img src=\"images/smile.png\"><br />Take Me with You!</div>", 
+            "<div id=\"smile\"><img src=\"images/smile.png\"><br />Don't Talk to Strangers!</div>"
         ];
         
         var i = parseInt((Math.random() * texts.length), 10);
