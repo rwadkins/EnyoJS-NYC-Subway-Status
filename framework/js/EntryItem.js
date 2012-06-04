@@ -75,15 +75,17 @@ enyo.kind({
     },
     handleTap: function(inSender, inEvent) {
         var favorite, d;
+        d = this.getData();
+        d.originator = this;
         if (inSender.name === "itemFavorite") {
-            d = this.getData();
             favorite = !d.favorite;
             d.favorite = favorite; 
             this.setFavorite(favorite);
             this.doItemFavorite(d);
         }
         else {
-            this.doItemSelected(this.getData());
+            this.doItemSelected(d);
         }
+        delete d.originator;
     }
 });
