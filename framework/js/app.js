@@ -41,7 +41,7 @@ enyo.kind({
                     kind: "onyx.Button", 
                     // content: "&#009881;", 
                     allowHtml: true,
-                    // ontap: "getMTAData",
+                    ontap: "configTap",
                     classes: "icon-buttons",
                     components: [
                         {
@@ -124,11 +124,31 @@ enyo.kind({
                 } 
             ]
         },
+        {
+            id: "refreshPopup",
+            name: "refreshPopup",
+            kind: "onyx.Popup",
+            classes: "onyx",
+            modal: true, 
+            floating: true,
+            classes: "refreshPopup",
+            showing: false,
+            components: [
+                { content: "AutoRefresh: ", classes: "onyx" },
+                { kind: "onyx.Button", classes: "onyx", value: "0", content: "Never", ontap: "handleRefreshTap" },
+                { kind: "onyx.Button", classes: "onyx", value: "300000", content: "5 Minutes", ontap: "handleRefreshTap" },
+                { kind: "onyx.Button", classes: "onyx", value: "600000", content: "10 Minutes", ontap: "handleRefreshTap" },
+                { kind: "onyx.Button", classes: "onyx", value: "900000", content: "15 Minutes", ontap: "handleRefreshTap" },
+                { kind: "onyx.Button", classes: "onyx", value: "1800000", content: "30 Minutes", ontap: "handleRefreshTap" },
+                { kind: "onyx.Button", classes: "onyx", value: "3600000", content: "1 hour", ontap: "handleRefreshTap" },
+            ]
+        },
         {kind: "Signals", onkeyup: "handleKeyPress"}
     ],
     published: {
         data: "",
         favorites: "",
+        autoRefresh: ""
     },
     handlers: {
         onItemSelected: "entryItemSelected",
@@ -138,12 +158,15 @@ enyo.kind({
     create: function() {
         this.inherited(arguments);
         this.storage = Storage;
+        this.preferences = {};
         // this.retrieveFromStorage()
+        this.neverAutoRetrieved = 0;
         this.$.Main.setIndex(0);
     },
     retrieveFromStorage: function() {
         this.setFavorites(this.storage.get("favorites") || []);
         this.opened = this.storage.get("opened") || {};
+        this.setAutoRefresh(this.storage.get("autoRefresh") || 0);
         this.setData(this.storage.get("feedData") || {});
     },
     getMTAData: function() {
@@ -166,6 +189,28 @@ enyo.kind({
         this.$.MainList.setCount(this.getServices().length);
         this.storage.set("feedData", this.getData());
         return true;
+    },
+    autoRefreshChanged: function(inSender, inEvent) {
+        // console.log(this.getAutoRefresh());
+        // this.preferences.autoRefresh = this.getAutoRefresh();
+        this.doRefreshTimeout();
+        this.storage.set("autoRefresh", this.getAutoRefresh());
+    },
+    doRefreshTimeout: function() {
+        var v = this.getAutoRefresh();
+        
+        if (parseInt(v) === 0) {
+            if (this.refreshTimeoutID) {
+                window.clearInterval(this.refreshTimeoutID);
+            }
+        }
+        else {
+            if (this.neverAutoRetrieved === 0) {
+                this.getMTAData();
+                this.neverAutoRetrieved = 1;
+            }
+            this.refreshTimeoutID = window.setInterval(enyo.bind(this, "getMTAData"), v);
+        }        
     },
     setUpRow: function(inSender, inEvent) {
         var i = inEvent.index;
@@ -294,5 +339,14 @@ enyo.kind({
             inEvent.stopPropagation();
             return true;
         }
+    },
+    configTap: function(inSender, inEvent) {
+        this.$.refreshPopup.show();
+    }, 
+    handleRefreshTap: function(inSender, inEvent) {
+        // console.dir([inSender, inEvent]);
+        this.setAutoRefresh(inEvent.dispatchTarget.value);
+        this.$.refreshPopup.hide();
     }
+    
 });

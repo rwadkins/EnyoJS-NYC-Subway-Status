@@ -200,3 +200,26 @@ p {
     margin-left: -75px;
     padding-top: 1em;
 }
+
+.refreshPopup {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 200px;
+    padding: 1em;
+}
+
+.refreshPopup > button {
+    display: block;
+    width: 100%;
+    -webkit-box-sizing: border-box;    
+}
+
+.refreshPopup > div {
+    background: none;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 900;
+}
+
+
