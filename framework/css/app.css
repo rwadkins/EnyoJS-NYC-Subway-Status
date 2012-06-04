@@ -153,10 +153,10 @@ p {
     }
 }
 
-/*.onyx-toolbar .onyx-button {
-	background-color: #918F8F !important;
-	border: none !important;
-}*/
+.onyx-toolbar .onyx-button {
+	background-color: #918F8F;
+	border: none;
+}
 
 .green-status,
 .yellow-status,

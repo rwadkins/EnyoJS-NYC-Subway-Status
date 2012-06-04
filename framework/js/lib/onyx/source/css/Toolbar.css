@@ -28,9 +28,8 @@
 
 .onyx-toolbar .onyx-button {
 	color: #F2F2F2;
-	/*background-color: #555656;
-	border-color: rgba(15, 15, 15, 0.5);*/
-	background-color: #918F8F;
+	background-color: #555656;
+	border-color: rgba(15, 15, 15, 0.5);
 	margin-top: 0;
 	margin-bottom: 0;
 	height: 36px;
