@@ -191,3 +191,12 @@ p {
     font-size: 12px;
 }
 
+.lastUpdated {
+    position: absolute;
+    font-size: 12px;
+    text-align: center;
+    width: 150px;
+    left: 50%;
+    margin-left: -75px;
+    padding-top: 1em;
+}

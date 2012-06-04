@@ -113,6 +113,12 @@ enyo.kind({
                             src: "images/back.png"
                         }
                     ]
+                },
+                {
+                    name: "LastUpdated",
+                    classes: "lastUpdated",
+                    content: "",
+                    // fit: true
                 } 
             ]
         },
@@ -154,6 +160,7 @@ enyo.kind({
     },
     dataChanged: function(inSender, inResponse) {
         this.markFavorites();
+        this.$.LastUpdated.setContent(this.getData().timeStamp);
         this.$.MainList.setCount(this.getServices().length);
         this.storage.set("feedData", this.getData());
         return true;
