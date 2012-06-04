@@ -7,6 +7,7 @@ enyo.kind({
             kind: "onyx.Toolbar",
             layoutKind: "FittableColumnsLayout",
             style: "height: 55px;",
+            classes: "enyo-unselectable",
             components: [
                 // {
                     // name: "BackButton",
@@ -99,6 +100,7 @@ enyo.kind({
             kind: "onyx.Toolbar",
             layoutKind: "FittableColumnsLayout",
             style: "height: 40px;",
+            classes: "enyo-unselectable",
             components: [
                 {
                     name: "BackButton",
