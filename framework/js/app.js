@@ -141,9 +141,11 @@ enyo.kind({
                 { kind: "onyx.Button", classes: "onyx", value: "900000", content: "15 Minutes", ontap: "handleRefreshTap" },
                 { kind: "onyx.Button", classes: "onyx", value: "1800000", content: "30 Minutes", ontap: "handleRefreshTap" },
                 { kind: "onyx.Button", classes: "onyx", value: "3600000", content: "1 hour", ontap: "handleRefreshTap" },
-            ]
+            ],
+            onHide: "refreshHideHandler"
         },
-        {kind: "Signals", onkeyup: "handleKeyPress"}
+        {kind: "Signals", onkeyup: "handleKeyPress"},
+        {name: "refreshPopupAnimator", kind: "Animator", onStep: "refreshPopupAnimatorStep", onEnd: "refreshPopupAnimatorEnd" }
     ],
     published: {
         data: "",
@@ -341,12 +343,63 @@ enyo.kind({
         }
     },
     configTap: function(inSender, inEvent) {
-        this.$.refreshPopup.show();
+        var h, w;
+        var p = this.$.refreshPopup;
+        p.show();
+        p.applyStyle("height", null);
+        p.applyStyle("width", null);
+        h = p.hasNode()["offsetHeight"];
+        w = p.hasNode()["offsetWidth"];
+        
+        p.applyStyle("height", 0);
+        p.applyStyle("width", 0);
+        this.$.refreshPopupAnimator.play(
+            {
+                startValue: 0,
+                endValue: 1,
+                height: h,
+                width: w
+            }
+        );
     }, 
     handleRefreshTap: function(inSender, inEvent) {
         // console.dir([inSender, inEvent]);
         this.setAutoRefresh(inEvent.dispatchTarget.value);
         this.$.refreshPopup.hide();
+    },
+    refreshPopupAnimatorStep: function(inEvent) {
+        /* 
+         * height and width come in with padding and border widths included,
+         * but setting the height and width styles on the elements should
+         * not include those things. dimensionExtra should be padding * 2 + 
+         * border width * 2.  I don't know why the browsers don't give the 
+         * ability to take real, consistent measurements of elements. 
+         */
+        var dimensionExtra = 30;
+        
+        this.$.refreshPopup.applyStyle("height", Math.max(parseInt(inEvent.height * inEvent.value - dimensionExtra), 0) + "px");
+        this.$.refreshPopup.applyStyle("width", Math.max(parseInt(inEvent.width * inEvent.value - dimensionExtra), 0) + "px");
+    },
+    refreshPopupAnimatorEnd: function(inEvent) {
+        var p = this.$.refreshPopup;
+        if (p.closing) {
+            p.hide();
+            p.closing = 0;
+        }
+    },
+    refreshHideHandler: function(inSender, inEvent) {
+        var h, w;
+        var p = this.$.refreshPopup;
+        h = p.hasNode()["offsetHeight"];
+        w = p.hasNode()["offsetWidth"];
+        p.closing = 1;
+        this.$.refreshPopupAnimator.play(
+            {
+                startValue: 1,
+                endValue: 0,
+                height: h,
+                width: w
+            }
+        );        
     }
-    
 });

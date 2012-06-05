@@ -66,9 +66,9 @@ p {
 #detailPane {
     -webkit-box-sizing: border-box;
     padding: 5px 0px;
-    -webkit-box-shadow: inset 1px 0px 8px 0px #000;
-    box-shadow: inset 1px 0px 8px 0px #000;
-    height: 100%;
+/*    -webkit-box-shadow: inset 1px 0px 8px 0px #000;*/
+/*    box-shadow: inset 1px 0px 8px 0px #000;*/
+/*    height: 100%;*/
 }
 
 #smile {
@@ -206,7 +206,9 @@ p {
     top: 20px;
     right: 20px;
     width: 200px;
-    padding: 1em;
+/*    padding: 1em;*/
+    padding: 14px;
+    overflow: hidden;
 }
 
 .refreshPopup > button {
