@@ -8,7 +8,8 @@ function parseData(parseText) {
 
     data.responseCode = nodeByName(xmlDoc, "responsecode").childNodes[0].nodeValue;
     data.timeStamp = nodeByName(xmlDoc, "timestamp").childNodes[0].nodeValue;
-
+	var ampm = data.timeStamp.substring(data.timeStamp.length -2);
+	data.timeStamp = data.timeStamp.substring(0,data.timeStamp.lastIndexOf(":")) + " " + ampm;
     for( s = 0; s < services.length; s += 1) {
         data[services[s]] = {};
         service = nodeByName(xmlDoc, services[s]);

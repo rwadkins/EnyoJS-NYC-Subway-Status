@@ -119,6 +119,7 @@ enyo.kind({
                 {
                     name: "LastUpdated",
                     classes: "lastUpdated",
+					allowHtml: true,
                     content: "",
                     // fit: true
                 } 
@@ -134,7 +135,7 @@ enyo.kind({
             classes: "refreshPopup",
             showing: false,
             components: [
-                { content: "AutoRefresh: ", classes: "onyx" },
+                { content: "Set Auto Update Preference", classes: "onyx" },
                 { kind: "onyx.Button", classes: "onyx", value: "0", content: "Never", ontap: "handleRefreshTap" },
                 { kind: "onyx.Button", classes: "onyx", value: "300000", content: "5 Minutes", ontap: "handleRefreshTap" },
                 { kind: "onyx.Button", classes: "onyx", value: "600000", content: "10 Minutes", ontap: "handleRefreshTap" },
@@ -185,7 +186,7 @@ enyo.kind({
     },
     dataChanged: function(inSender, inResponse) {
         this.markFavorites();
-        this.$.LastUpdated.setContent(this.getData().timeStamp);
+        this.$.LastUpdated.setContent("Updated: " + this.getData().timeStamp);
         this.$.MainList.setCount(this.getServices().length);
         this.storage.set("feedData", this.getData());
         return true;
@@ -268,6 +269,7 @@ enyo.kind({
         if(this.isSmall()) {
             this.$.Main.setIndex(1);
             this.$.BackButton.setShowing(true);
+			this.$.LastUpdated.setShowing(false);
         }
         if (this.lastSelectedItem) {
             this.lastSelectedItem.addRemoveClass("entry-item-selected", false);
@@ -278,6 +280,7 @@ enyo.kind({
     },
     backTap: function(inSender, inEvent) {
         this.$.BackButton.setShowing(false);
+		this.$.LastUpdated.setShowing(true);
         if (this.lastSelectedItem) {
             this.lastSelectedItem.addRemoveClass("entry-item-selected", false);
         }
