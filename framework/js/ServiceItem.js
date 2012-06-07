@@ -64,6 +64,9 @@ enyo.kind({
         var k = this.getLines()[i];
         var d = this.getData()[k];
         var itemControl = inEvent.item.controls[0];
+		
+		if( this.title === 'Subway' && k !== 'SIR' )
+		k = k.replace(/(\B)/g, '$1 | ');
         
         itemControl.setTitle(k);
         itemControl.setData(d);
