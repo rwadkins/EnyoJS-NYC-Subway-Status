@@ -45,8 +45,16 @@ enyo.kind({
         this.$.itemTitle.setContent(this.getTitle());
     },
     dataChanged: function(inSender, inEvent) {
-        this.$.itemStatus.setContent(this.statusTranslation(this.getData().status).text);
-        this.$.itemStatusColor.setClassAttribute(this.statusTranslation(this.getData().status).colorStyle);
+        var status = "Unknown";
+        var colorStyle = "unknown-status";
+        
+        if (this.statusTranslation(this.getData().status)) {
+            status = this.statusTranslation(this.getData().status).text;
+            colorStyle = this.statusTranslation(this.getData().status).colorStyle;
+        }
+        
+        this.$.itemStatus.setContent(status);
+        this.$.itemStatusColor.setClassAttribute(colorStyle);
     },
     statusTranslation: function(inString) {
         var statuses = {
@@ -65,6 +73,10 @@ enyo.kind({
             "DELAYS": {
                 text: "Delays",
                 colorStyle: "yellow-status"
+            },
+            "SUSPENDED": {
+                text: "Suspended",
+                colorStyle: "black-status"
             }
         };
         

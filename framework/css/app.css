@@ -159,7 +159,8 @@ p {
 .green-status,
 .yellow-status,
 .red-status,
-.orange-status {
+.orange-status,
+.black-status {
     -webkit-box-sizing: border-box;
     border-radius: 5px;
     background-image: url("../js/lib/onyx/images/gradient.png");
@@ -183,6 +184,11 @@ p {
 .orange-status {
     background-color: orange;
     border: 1px solid #C68E17;
+}
+
+.black-status {
+    background-color: #444;
+    border: 1px solid #222;
 }
 
 .itemStatus {
