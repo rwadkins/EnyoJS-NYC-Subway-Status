@@ -27,7 +27,7 @@ enyo.kind({
                             name: "getDataIcon",
                             kind: "onyx.Icon",
                             // classes: "spinner",
-                            src: "images/refresh.png"
+                            src: "images/menu-icon-refresh.png"
                             // src: "images/loader.gif"
                         }
                     ]
@@ -46,7 +46,7 @@ enyo.kind({
                     components: [
                         {
                             kind: "onyx.Icon",
-                            src: "images/gear.png"
+                            src: "images/menu-icon-gear.png"
                         }
                     ]
                 }
