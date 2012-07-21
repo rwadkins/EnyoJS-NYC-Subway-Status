@@ -188,7 +188,14 @@ enyo.kind({
     },
     dataChanged: function(inSender, inResponse) {
         this.markFavorites();
-        this.$.LastUpdated.setContent("Updated: " + this.getData().timeStamp);
+        var updateDate = new Date(this.getData().timeStamp);
+        if (updateDate != 'Invalid Date') {
+            var updateDateMediumDate = updateDate.format('mediumDate');
+            var updateDateShortTime = updateDate.format('shortTime');
+            this.$.LastUpdated.setContent("Updated: " + updateDateMediumDate + ' ' + updateDateShortTime);
+        } else {
+            this.$.LastUpdated.setContent("Updated: " + this.getData().timeStamp);
+        }
         this.$.MainList.setCount(this.getServices().length);
         this.storage.set("feedData", this.getData());
         return true;
