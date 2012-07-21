@@ -65,10 +65,37 @@ enyo.kind({
         var d = this.getData()[k];
         var itemControl = inEvent.item.controls[0];
 		
-		if( this.title === 'Subway' && k !== 'SIR' )
-		k = k.replace(/(\B)/g, '$1 | ');
         
-        itemControl.setTitle(k);
+        var title;
+        if ((this.title == 'Subway' || this.title == 'Favorites') && k !== 'SIR') {
+            
+            for (lineIndex in k) {
+                var lineName = k[lineIndex];
+            
+                // why doesnt this work?
+                //var lineImage = new enyo.Image({src: 'images/mta/' + lineName + '.png', show: true});
+                //itemControl.$.itemTitle.addComponent(lineImage);
+                
+                // or this because of naming
+                //var image = new enyo.Image({src: 'images/mta/50px-NYCS-bull-trans-' + lineName + '.png', show: true})
+                //itemControl.$.itemTitle.createComponent(image);
+                itemControl.$.itemTitle.createComponent({
+                        kind: 'Image',
+                        src: 'images/mta/NYCS-bull-trans-' + lineName + '.png',
+                        classes: 'mta-subway-bullet'});
+            }
+            
+        } else if (k == 'SIR') {
+                  itemControl.$.itemTitle.createComponent({
+                        kind: 'Image',
+                        src: 'images/mta/SIR_logo.png',
+                        classes: 'mta-subway-bullet'});
+        } else {
+            itemControl.$.itemTitle.createComponent({content: k});
+        }
+		
+        //itemControl.setTitle(title);
+
         itemControl.setData(d);
         itemControl.setFavorite(d.favorite);
         this.$.EntryListDrawer.setOpen(this.getOpen());

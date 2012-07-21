@@ -57,7 +57,7 @@ p {
 }
 
 .plannedWorkDetail {
-    font-style:italic; 
+    /*font-style:italic;*/
     color:black; 
     margin-top:-10px; 
     line-height: -75px;
@@ -114,6 +114,10 @@ p {
 .entry-item-selected {
     background-color: #918F8F;
     color: #FFF;
+}
+
+.mta-subway-bullet {
+    height: 30px;
 }
 
 .itemFavorite {
@@ -192,7 +196,7 @@ p {
 }
 
 .itemStatus {
-    font-size: 12px;
+    font-size: 9px;
 }
 
 .lastUpdated {
