@@ -196,8 +196,8 @@ p {
 }
 
 .lastUpdated {
-    /*position: absolute;
-    font-size: 15px;*/
+    /*position: absolute;*/
+    font-size: 12px;
     text-align: center;
     /*width: 150px;*/
     /*left: 50%;*/
@@ -206,7 +206,7 @@ p {
 	width:100%;
 	/*margin-left: auto;
 	margin-right: auto;*/
-	padding-top:.2em;
+	padding-top:1.0em;
 }
 
 .refreshPopup {
