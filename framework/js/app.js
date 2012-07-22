@@ -183,7 +183,9 @@ enyo.kind({
         return true;
     },
     handleData: function(inSender, inResponse) {
-        this.setData(parseData(inResponse));
+        var parsedData = parseData(inResponse);
+        var transformedData = transformData(parsedData);
+        this.setData(transformedData);
         this.$.getDataIcon.addRemoveClass("spinner", false);
     },
     dataChanged: function(inSender, inResponse) {
