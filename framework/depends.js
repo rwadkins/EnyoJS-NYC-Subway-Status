@@ -1,4 +1,5 @@
 enyo.depends(
+    "$lib/date.format.js",
     "$lib/onyx/",
     "$lib/onyx/source/wip-package.js",
     "$lib/layout/",
