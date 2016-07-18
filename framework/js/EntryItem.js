@@ -20,9 +20,11 @@ enyo.kind({
         },
         {
             name: "itemTitle",
-            caption: "",
-            style: "position: absolute; top: 10px; left: 39px;"
-            //fit: true
+            kind: "Control",
+            //caption: "",
+            style: "position: absolute; top: 10px; left: 39px;",
+            //fit: true,
+            components: []
         },
         {
             name: "itemStatus",
@@ -42,7 +44,7 @@ enyo.kind({
         favorite: false
     },
     titleChanged: function(inSender, inEvent) {
-        this.$.itemTitle.setContent(this.getTitle());
+        //this.$.itemTitle.setContent(this.getTitle());
     },
     dataChanged: function(inSender, inEvent) {
         var status = "Unknown";
